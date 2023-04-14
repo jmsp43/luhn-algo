@@ -9,10 +9,14 @@ export default function App() {
   const isValid = (cardNum) =>{
     let split = String(cardNum).split('')
     let newNum = 0
+    let counter = 1
 
     for (let i = split.length - 2; i >= 0; i--) {
+      //every OTHER number
+      if (counter % 2 === 0) {
         split[i] = split[i] * 2
         newNum += split[i]
+      }
     }
 
     if (newNum % 10 === 0) {
