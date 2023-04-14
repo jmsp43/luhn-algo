@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState, useEffect} from 'react'
+import Form from './components/Form'
 
-function App() {
+
+export default function App() {
+  const [cardNum, setCardNum] = useState('')
+
+  const isValid = (cardNum) =>{
+    let split = String(cardNum).split('')
+    let newNum = 0
+
+    for (let i = split.length - 2; i >= 0; i--) {
+        split[i] = split[i] * 2
+        newNum += split[i]
+    }
+
+    if (newNum % 10 === 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
+  useEffect(() => {
+  isValid('1234567890', [])
+}) 
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form
+        cardNum ={setCardNum}
+        isValid = {isValid}
+      />
+
+      
     </div>
   );
 }
 
-export default App;
